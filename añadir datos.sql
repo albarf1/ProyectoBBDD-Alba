@@ -1,10 +1,10 @@
--- 1. Carga inicial de Membresias
+-- 1. Carga inicial das Membresias
 INSERT INTO Membresias (tipo, precio_mensual, beneficios) VALUES
 ('free', 0, 'Reservas limitadas, acceso básico a estadísticas'),
 ('premium', 19.99, 'Acceso completo a métricas y análisis'),
 ('gold', 39.99, 'Todas las funciones premium ');
 
--- 2. Carga inicial de Usuarios (sin password_hash)
+-- 2. Carga inicial dos Usuarios 
 INSERT INTO Usuarios (nombre, email, membresia_id, rol)
 VALUES
 ('Javier Feijóo López', 'javier.feijoo@iessanmamede.com', 1, 'entrenador'),
@@ -33,7 +33,7 @@ VALUES
 ('Anxo Vázquez Manzano', 'anxo.vazquez@iessanmamede.com', 3, 'staff'),
 ('David Vázquez Nóvoa', 'david.vazquez@iessanmamede.com', 2, 'jugador');
 
--- 3. Carga inicial de Pistas
+-- 3. Carga inicial das Pistas
 INSERT INTO Pistas (nombre, estado) VALUES
 ('Pista 1 - Exterior', 'disponible'),
 ('Pista 2 - Interior', 'disponible'),
@@ -44,7 +44,7 @@ INSERT INTO Pistas (nombre, estado) VALUES
 ('Pista 7 - Interior', 'disponible'),
 ('Pista 8 - Exterior', 'disponible');
 
--- 4. Carga inicial de SensoresPista
+-- 4. Carga inicial dos SensoresPista
 INSERT INTO SensoresPista (pista_id, tipo_sensor, ultima_calibracion) VALUES
 (1, 'iluminacion', '2024-03-01'),
 (1, 'humedad', '2024-03-01'),
@@ -58,7 +58,7 @@ INSERT INTO SensoresPista (pista_id, tipo_sensor, ultima_calibracion) VALUES
 (7, 'humedad', '2024-03-06'),
 (8, 'movimiento', '2024-03-07');
 
--- 5. Carga inicial de Reservas
+-- 5. Carga inicial das Reservas
 INSERT INTO Reservas (usuario_id, pista_id, fecha_inicio, duracion, estado) VALUES
 (2, 1, '2024-04-05 10:00:00', 60, 'activa'),
 (3, 2, '2024-04-05 11:00:00', 90, 'cancelada'),
@@ -68,7 +68,7 @@ INSERT INTO Reservas (usuario_id, pista_id, fecha_inicio, duracion, estado) VALU
 (11, 4, '2024-04-09 12:00:00', 90, 'activa'),
 (13, 6, '2024-04-10 14:00:00', 60, 'activa');
 
--- 6. Carga inicial de Partidos
+-- 6. Carga inicial dos Partidos
 INSERT INTO Partidos (pista_id, fecha_hora, tipo) VALUES
 (1, '2024-04-05 10:00:00', 'amistoso'),
 (2, '2024-04-05 11:00:00', 'torneo'),
@@ -76,7 +76,7 @@ INSERT INTO Partidos (pista_id, fecha_hora, tipo) VALUES
 (1, '2024-04-07 15:00:00', 'amistoso'),
 (3, '2024-04-08 10:00:00', 'amistoso');
 
--- 7. Carga inicial de JugadoresPartido
+-- 7. Carga inicial dos JugadoresPartido
 INSERT INTO JugadoresPartido (partido_id, usuario_id, posicion) VALUES
 (1, 2, 'derecha'), (1, 3, 'izquierda'),
 (2, 5, 'derecha'), (2, 7, 'izquierda'),
@@ -84,7 +84,7 @@ INSERT INTO JugadoresPartido (partido_id, usuario_id, posicion) VALUES
 (4, 13, 'derecha'), (4, 15, 'izquierda'),
 (5, 17, 'derecha'), (5, 19, 'izquierda');
 
--- 8. Carga inicial de EstadisticasJugadores
+-- 8. Carga inicial das EstadisticasJugadores
 INSERT INTO EstadisticasJugadores (usuario_id, partidos_jugados, victorias, nivel_actual)
 SELECT u.user_id, FLOOR(RAND() * 10), FLOOR(RAND() * 10), FLOOR(1 + RAND() * 5)
 FROM Usuarios u
@@ -92,7 +92,7 @@ WHERE u.rol = 'jugador'
 ORDER BY RAND()
 LIMIT 15;
 
--- 9. Carga inicial de MetricasJuego
+-- 9. Carga inicial das MetricasJuego
 INSERT INTO MetricasJuego (partido_id, usuario_id, velocidad_max_golpe, precision_media, distancia_recorrida)
 VALUES
 (1, 2, 85.5, 78.3, 2000.0),
@@ -106,7 +106,7 @@ VALUES
 (5, 17, 83.4, 76.8, 2000.0),
 (5, 19, 89.7, 81.5, 2100.0);
 
--- 10. Carga inicial de Logros
+-- 10. Carga inicial dos Logros
 INSERT INTO Logros (nombre, descripcion, objetivo)
 VALUES
 ('Primer partido', 'Jugar al menos un partido', 1),
@@ -115,7 +115,7 @@ VALUES
 ('Velocidad extrema', 'Alcanzar una velocidad máxima de golpe superior a 90 km/h', 90),
 ('Precisión perfecta', 'Mantener una precisión media superior al 85%', 85);
 
--- 11. Carga inicial de LogrosDesbloqueados
+-- 11. Carga inicial dos LogrosDesbloqueados
 INSERT INTO LogrosDesbloqueados (usuario_id, logro_id, fecha) VALUES
 (2, 1, '2024-04-05'),
 (3, 1, '2024-04-05'),
@@ -128,14 +128,14 @@ INSERT INTO LogrosDesbloqueados (usuario_id, logro_id, fecha) VALUES
 (15, 1, '2024-04-10'),
 (17, 1, '2024-04-10');
 
--- 12. Carga inicial de MétodosPago
+-- 12. Carga inicial dos MétodosPago
 INSERT INTO MetodosPago (proveedor, detalles) VALUES
 ('tarjeta', 'Visa ending in 4242'),
 ('efectivo', 'Pagado en taquilla'),
 ('tarjeta', 'Mastercard ending in 1111'),
 ('efectivo', 'Efectivo entregado a staff');
 
--- 13. Carga inicial de Pagos
+-- 13. Carga inicial dos Pagos
 INSERT INTO Pagos (usuario_id, reserva_id, membresia_id, metodo_id, monto)
 VALUES
 (2, 1, NULL, 1, 19.99),
@@ -146,7 +146,7 @@ VALUES
 (11, 6, NULL, 4, 19.99),
 (13, 7, NULL, 1, 0); 
 
--- 14. Carga inicial de PreferenciasJugador (opcional)
+-- 14. Carga inicial das PreferenciasJugador
 INSERT INTO PreferenciasJugador (usuario_id, nivel, estilo_preferido)
 VALUES
 (2, 'avanzado', 'agresivo'),

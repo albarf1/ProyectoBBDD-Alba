@@ -1,8 +1,5 @@
-
--- ========================
--- FUNCIONES PADLETECH
--- ========================
-
+use padeltech;
+-- calcular nivel del jugador
 DELIMITER //
 CREATE FUNCTION calcular_nivel_jugador(usuario_id INT)
 RETURNS INT
@@ -15,7 +12,7 @@ BEGIN
     RETURN nivel;
 END //
 DELIMITER ;
-
+-- calcular la precision
 DELIMITER //
 CREATE FUNCTION calcular_precision_media(usuario_id INT)
 RETURNS DECIMAL(5,2)
@@ -29,10 +26,7 @@ BEGIN
 END //
 DELIMITER ;
 
--- ========================
--- PROCEDIMIENTOS PADLETECH
--- ========================
-
+-- reservas con validacion
 DELIMITER //
 CREATE PROCEDURE crear_reserva_con_validacion(
     IN id_usuario INT,
@@ -58,7 +52,7 @@ BEGIN
     END IF;
 END //
 DELIMITER ;
-
+-- registrar logros
 DELIMITER //
 CREATE PROCEDURE registrar_logro_si_cumple(
     IN id_usuario INT,
@@ -78,7 +72,7 @@ BEGIN
     END IF;
 END //
 DELIMITER ;
-
+-- desbloquear logros por victorias
 DELIMITER //
 CREATE PROCEDURE desbloquear_logro_por_victorias(
     IN id_usuario INT
@@ -93,7 +87,7 @@ BEGIN
     CALL registrar_logro_si_cumple(id_usuario, 2, total_victorias);
 END //
 DELIMITER ;
-
+-- realizar oago
 DELIMITER //
 CREATE PROCEDURE realizar_pago(
     IN id_usuario INT,
@@ -113,6 +107,8 @@ BEGIN
     VALUES (id_usuario, id_reserva, id_membresia, id_metodo, monto_final);
 END //
 DELIMITER ;
+
+-- establecer preferencias del jugador
 
 DELIMITER //
 CREATE PROCEDURE establecer_preferencias_jugador(
